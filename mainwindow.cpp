@@ -7,11 +7,10 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    strModel = new QStringListModel(this);
-
-    ui->listView->setModel(strModel);
-    ui->treeView->setModel(strModel);
-    ui->tableView->setModel(strModel);
+    strModel.setStringList(strList);
+    ui->listView->setModel(&strModel);
+    ui->treeView->setModel(&strModel);
+    ui->tableView->setModel(&strModel);
 
     connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::addToViews);
 }
@@ -23,9 +22,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::addToViews()
 {
-    QString str = ui->lineEdit->text();
+    strList.append(ui->lineEdit->text());
     ui->lineEdit->clear();
-    QStringList strList = strModel->stringList();
-    strList.append(str);
-    strModel->setStringList(strList);
+    strModel.setStringList(strList);
 }

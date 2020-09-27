@@ -18,7 +18,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
-    QStringListModel* strModel;
+    QStringListModel strModel;
+
+    QStringList strList;
 
 private slots:
     void addToViews();
